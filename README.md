@@ -1,36 +1,23 @@
 # hydra-consent-app-go
 
-**This repository works only with ORY Hydra versions prior to the 1.0.0 release. For a version that works with 1.0.0 check out [this repository](https://github.com/ory/hydra-login-consent-node).**
-
-[![Build Status](https://travis-ci.org/ory/hydra-consent-app-go.svg?branch=master)](https://travis-ci.org/ory/hydra-consent-app-go)
+**This is a fork of the old [hydra-consent-app-go](https://github.com/ory/hydra-consent-app-go), updated to work with ORY Hydra >= 1.0.0**
 
 This is a simple consent app for Hydra written in Go. It uses the Hydra SDK.
-To run the example, first install Hydra, [dep](https://github.com/golang/dep)
-and this project:
 
-```
-go get -u -d github.com/ory/hydra-consent-app-go
-cd $GOPATH/src/github.com/ory/hydra-consent-app-go
-dep ensure
+```bash
+go get -u -d github.com/gregdhill/hydra-consent-app-go
+cd $GOPATH/src/github.com/gregdhill/hydra-consent-app-go
 ```
 
-Next open a shell and run:
+Next open a shell and tell docker to start Hydra in the background:
 
-```sh
-export FORCE_ROOT_CLIENT_CREDENTIALS=demo:demo
-export CONSENT_URL=http://localhost:3000/consent
-hydra host --dangerous-force-http
+```bash
+./setup.sh
 ```
 
-In another console, run
+If you're in the project's directory:
 
-```
-hydra-consent-app-go
-```
-
-or alternatively, if you're in the project's directory:
-
-```
+```bash
 go run main.go
 ```
 
@@ -47,6 +34,3 @@ Keep in mind that you will not be able to refresh the callback url, as the
 authorize code is valid only once. Also, this application needs to run on
 port 4445 in order for the demo to work. Usually the consent endpoint won't
 perform the authorize code, but for the sake of the demo we added that too.
-
-Make sure that you stop the docker-compose demo of the Hydra main repository,
-otherwise ports 4445 and 4444 are unassignable.
